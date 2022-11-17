@@ -27,6 +27,5 @@ public class RegisterView implements LoginRegisterView {
 
         this.userController.generateUser(name, username, password, phone, address);
 
-        input.close();
     }
 }

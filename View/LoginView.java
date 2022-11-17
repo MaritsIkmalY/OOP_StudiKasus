@@ -1,7 +1,8 @@
 package View;
 
+import Controller.UserController;
+
 import java.util.Scanner;
-import Controller.*;
 
 public class LoginView implements LoginRegisterView {
     public UserController userController = new UserController();
@@ -12,17 +13,15 @@ public class LoginView implements LoginRegisterView {
 
         System.out.print("Apakah Kamu Sudah Memiliki Akun ? (1/0) :");
         jawaban = input.nextInt();
+        input.nextLine();
         switch (jawaban) {
-            case 1:
-                this.inputData();
-                break;
-            case 0:
+            case 1 -> this.inputData();
+            case 0 -> {
                 RegisterView registerView = new RegisterView(userController);
                 registerView.inputData();
                 this.inputData();
-                break;
-            default:
-                System.out.println("Invalid");
+            }
+            default -> System.out.println("Invalid");
         }
     }
 
@@ -42,6 +41,7 @@ public class LoginView implements LoginRegisterView {
             mainView.showData();
         } else
             System.out.println("Gagal Masuk");
+
 
     }
 }
