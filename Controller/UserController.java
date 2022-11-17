@@ -2,6 +2,8 @@ package Controller;
 
 import Model.*;
 
+import java.util.Objects;
+
 public class UserController {
     public User user;
 
@@ -16,10 +18,7 @@ public class UserController {
     }
 
     public boolean checkUser(String username, String password) {
-        if (this.user.username == username && this.user.password == password)
-            return true;
-        else
-            return false;
+        return Objects.equals(this.user.username, username) && Objects.equals(this.user.password, password);
     }
 
     public User getData() {
