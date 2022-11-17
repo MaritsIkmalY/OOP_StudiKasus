@@ -17,13 +17,13 @@ public class LoginView implements LoginRegisterView {
                 this.inputData();
                 break;
             case 0:
-                RegisterView registerView = new RegisterView();
+                RegisterView registerView = new RegisterView(userController);
                 registerView.inputData();
+                this.inputData();
                 break;
             default:
                 System.out.println("Invalid");
         }
-        input.close();
     }
 
     public void inputData() {
@@ -38,10 +38,10 @@ public class LoginView implements LoginRegisterView {
 
         status = this.userController.checkUser(username, password);
         if (status) {
-            MainView mainView = new MainView();
+            MainView mainView = new MainView(userController);
             mainView.showData();
         } else
             System.out.println("Gagal Masuk");
-        input.close();
+
     }
 }

@@ -2,13 +2,9 @@ import View.*;
 import java.util.Scanner;
 
 public class Test {
-    public static LoginRegisterView loginRegisterView;
-
     public static void main(String[] args) {
-        int jawaban;
-        Scanner input = new Scanner(System.in);
+        LoginView login = new LoginView();
 
-        jawaban = input.nextInt();
-        input.close();
+        login.alreadyRegistered();
     }
 }

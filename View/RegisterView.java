@@ -6,13 +6,14 @@ import Controller.*;
 public class RegisterView implements LoginRegisterView {
     public UserController userController;
 
+    public RegisterView(UserController userController) {
+        this.userController = userController;
+    }
+
     public void inputData() {
         String name, username, password, phone, address;
         Scanner input = new Scanner(System.in);
 
-        public getController(UserController userController) {
-            this.userController = userController;
-        }
         System.out.print("Masukkan Name : ");
         name = input.nextLine();
         System.out.print("Masukkan Username : ");

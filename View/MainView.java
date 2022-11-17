@@ -7,9 +7,10 @@ public class MainView {
     public UserController userController;
     public User user;
 
-    public getController(UserController userController) {
+    public MainView(UserController userController) {
         this.userController = userController;
     }
+
 
     public void showData() {
         user = userController.getData();
