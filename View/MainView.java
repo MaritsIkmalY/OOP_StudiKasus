@@ -1,17 +1,14 @@
 package View;
 
-import Model.*;
+import Model.User;
 
 public class MainView {
-    public User user;
 
     public MainView(User user) {
-        this.user = user;
-        showData();
+        showData(user);
     }
 
-
-    public void showData() {
+    public void showData(User user) {
         System.out.println("====================");
         System.out.println("Main View");
         System.out.println("====================");

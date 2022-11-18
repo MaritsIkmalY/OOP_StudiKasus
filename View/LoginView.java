@@ -3,17 +3,12 @@ package View;
 import Controller.DbController;
 import Controller.LoginController;
 
-import java.util.Scanner;
-
-public class LoginView implements LoginRegisterView {
-    public DbController dbUser;
+public class LoginView extends AuthView {
     public LoginController loginController;
-    Scanner input;
 
     public LoginView() {
-        dbUser = new DbController();
+        dbController = new DbController();
         loginController = new LoginController();
-        input = new Scanner(System.in);
     }
 
     public void alreadyRegistered() {
@@ -30,7 +25,7 @@ public class LoginView implements LoginRegisterView {
             switch (jawaban) {
                 case 'y' -> this.inputData();
                 case 't' -> {
-                    new RegisterView(dbUser);
+                    new RegisterView(dbController);
                     this.inputData();
                 }
                 default -> System.out.println("Invalid Input");
@@ -44,7 +39,7 @@ public class LoginView implements LoginRegisterView {
     }
 
     public void inputData() {
-        boolean status;
+        boolean authCheck;
         String username;
         String password;
 
@@ -57,8 +52,8 @@ public class LoginView implements LoginRegisterView {
         System.out.print("Masukkan Password : ");
         password = input.nextLine();
 
-        status = this.loginController.Authentication(dbUser, username, password);
-        if (status) {
+        authCheck = this.loginController.Authentication(dbController.dbUser, username, password);
+        if (authCheck) {
             new MainView(loginController.user);
         } else
             System.out.println("Data not match in out record !!");

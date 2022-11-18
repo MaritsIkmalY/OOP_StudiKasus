@@ -4,11 +4,8 @@ import Controller.DbController;
 import Controller.RegisterController;
 import Model.User;
 
-import java.util.Scanner;
-
-public class RegisterView implements LoginRegisterView {
+public class RegisterView extends AuthView {
     public RegisterController registerController;
-    public DbController dbController;
 
     public RegisterView(DbController db) {
         registerController = new RegisterController();
@@ -17,8 +14,12 @@ public class RegisterView implements LoginRegisterView {
     }
 
     public void inputData() {
-        String name, username, password, phone, address;
-        Scanner input = new Scanner(System.in);
+        String name;
+        String username;
+        String password;
+        String phone;
+        String address;
+        User user;
 
         System.out.println("====================");
         System.out.println("Register Form");
@@ -35,10 +36,7 @@ public class RegisterView implements LoginRegisterView {
         System.out.print("Masukkan Address : ");
         address = input.nextLine();
 
-        storeUser(registerController.generateUser(name, username, password, phone, address));
-    }
-
-    public void storeUser(User user) {
-        dbController.dbUser.DataUser.add(user);
+        user = registerController.generateUser(name, username, password, phone, address);
+        registerController.storeUser(dbController.dbUser,user);
     }
 }

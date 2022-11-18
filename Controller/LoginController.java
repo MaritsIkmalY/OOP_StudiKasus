@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.DbUser;
 import Model.User;
 
 import java.util.Objects;
@@ -7,8 +8,8 @@ import java.util.Objects;
 public class LoginController {
     public User user;
 
-    public boolean Authentication(DbController db, String username, String password) {
-        for (User user : db.dbUser.DataUser) {
+    public boolean Authentication(DbUser db, String username, String password) {
+        for (User user : db.DataUser) {
 
             if (Objects.equals(user.username, username) && Objects.equals(user.password, password)) {
                 setAuthUser(user);
