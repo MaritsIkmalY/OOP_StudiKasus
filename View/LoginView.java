@@ -1,28 +1,46 @@
 package View;
 
-import Controller.UserController;
+import Controller.DbController;
+import Controller.LoginController;
 
 import java.util.Scanner;
 
 public class LoginView implements LoginRegisterView {
-    public UserController userController = new UserController();
-    Scanner input = new Scanner(System.in);
+    public DbController dbUser;
+    public LoginController loginController;
+    Scanner input;
+
+    public LoginView() {
+        dbUser = new DbController();
+        loginController = new LoginController();
+        input = new Scanner(System.in);
+    }
 
     public void alreadyRegistered() {
-        int jawaban;
+        char jawaban;
 
-        System.out.print("Apakah Kamu Sudah Memiliki Akun ? (1/0) :");
-        jawaban = input.nextInt();
-        input.nextLine();
-        switch (jawaban) {
-            case 1 -> this.inputData();
-            case 0 -> {
-                RegisterView registerView = new RegisterView(userController);
-                registerView.inputData();
-                this.inputData();
+        do {
+            System.out.println("====================");
+            System.out.println("System Login Register sederhana");
+            System.out.println("====================");
+            System.out.print("Apakah Kamu Sudah Memiliki Akun ? (y/t) :");
+            jawaban = input.next().charAt(0);
+            input.nextLine();
+
+            switch (jawaban) {
+                case 'y' -> this.inputData();
+                case 't' -> {
+                    new RegisterView(dbUser);
+                    this.inputData();
+                }
+                default -> System.out.println("Invalid Input");
             }
-            default -> System.out.println("Invalid");
-        }
+
+            System.out.print("\nIngin login kembali ? (y / t) : ");
+            jawaban = input.next().charAt(0);
+            input.nextLine();
+        } while (jawaban == 'y');
+
     }
 
     public void inputData() {
@@ -30,18 +48,19 @@ public class LoginView implements LoginRegisterView {
         String username;
         String password;
 
+        System.out.println("====================");
+        System.out.println("Login Form");
+        System.out.println("====================");
+
         System.out.print("Masukkan Username : ");
         username = input.nextLine();
         System.out.print("Masukkan Password : ");
         password = input.nextLine();
 
-        status = this.userController.checkUser(username, password);
+        status = this.loginController.Authentication(dbUser, username, password);
         if (status) {
-            MainView mainView = new MainView(userController);
-            mainView.showData();
+            new MainView(loginController.user);
         } else
-            System.out.println("Gagal Masuk");
-
-
+            System.out.println("Data not match in out record !!");
     }
 }

@@ -1,19 +1,20 @@
 package View;
 
 import Model.*;
-import Controller.*;
 
 public class MainView {
-    public UserController userController;
     public User user;
 
-    public MainView(UserController userController) {
-        this.userController = userController;
+    public MainView(User user) {
+        this.user = user;
+        showData();
     }
 
 
     public void showData() {
-        user = userController.getData();
+        System.out.println("====================");
+        System.out.println("Main View");
+        System.out.println("====================");
         System.out.println("Nama : " + user.name);
         System.out.println("Phone : " + user.phone);
         System.out.println("Address : " + user.address);
