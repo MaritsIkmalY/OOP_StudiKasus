@@ -40,6 +40,7 @@ public class LoginView implements BaseView {
             System.out.print("\nIngin login kembali ? (y / t) : ");
             jawaban = input.next().charAt(0);
             input.nextLine();
+            System.out.println();
         } while (jawaban == 'y');
 
     }
