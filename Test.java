@@ -2,8 +2,9 @@ import View.*;
 
 public class Test {
     public static void main(String[] args) {
-        LoginView login = new LoginView();
-
-        login.alreadyRegistered();
+//        LoginView login = new LoginView();
+//
+//        login.alreadyRegistered();
+        MainView view = new MainView();
     }
 }

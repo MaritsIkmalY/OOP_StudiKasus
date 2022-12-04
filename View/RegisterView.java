@@ -1,25 +1,20 @@
 package View;
 
-import Controller.DbController;
 import Controller.RegisterController;
-import Model.User;
+import Database.Db;
 
-import java.util.Scanner;
-
-public class RegisterView implements LoginRegisterView {
+public class RegisterView implements BaseView {
     public RegisterController registerController;
-    public DbController dbController;
+    public Db db;
 
-    public RegisterView(DbController db) {
+    public RegisterView(Db db) {
         registerController = new RegisterController();
-        this.dbController = db;
+        this.db = db;
         this.inputData();
     }
 
     public void inputData() {
         String name, username, password, phone, address;
-        Scanner input = new Scanner(System.in);
-
         System.out.println("====================");
         System.out.println("Register Form");
         System.out.println("====================");
@@ -35,10 +30,6 @@ public class RegisterView implements LoginRegisterView {
         System.out.print("Masukkan Address : ");
         address = input.nextLine();
 
-        storeUser(registerController.generateUser(name, username, password, phone, address));
-    }
-
-    public void storeUser(User user) {
-        dbController.dbUser.DataUser.add(user);
+        registerController.storeUser(db, registerController.generateUser(name, username, password, phone, address));
     }
 }

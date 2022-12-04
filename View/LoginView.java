@@ -1,19 +1,15 @@
 package View;
 
-import Controller.DbController;
+import Controller.DbConnection;
 import Controller.LoginController;
 
-import java.util.Scanner;
-
-public class LoginView implements LoginRegisterView {
-    public DbController dbUser;
+public class LoginView implements BaseView {
+    public DbConnection dbConnection;
     public LoginController loginController;
-    Scanner input;
 
     public LoginView() {
-        dbUser = new DbController();
+        dbConnection = new DbConnection();
         loginController = new LoginController();
-        input = new Scanner(System.in);
     }
 
     public void alreadyRegistered() {
@@ -21,7 +17,7 @@ public class LoginView implements LoginRegisterView {
 
         do {
             System.out.println("====================");
-            System.out.println("System Login Register sederhana");
+            System.out.println("Todo List App");
             System.out.println("====================");
             System.out.print("Apakah Kamu Sudah Memiliki Akun ? (y/t) :");
             jawaban = input.next().charAt(0);
@@ -30,7 +26,7 @@ public class LoginView implements LoginRegisterView {
             switch (jawaban) {
                 case 'y' -> this.inputData();
                 case 't' -> {
-                    new RegisterView(dbUser);
+                    new RegisterView(dbConnection.db);
                     this.inputData();
                 }
                 default -> System.out.println("Invalid Input");
@@ -57,9 +53,9 @@ public class LoginView implements LoginRegisterView {
         System.out.print("Masukkan Password : ");
         password = input.nextLine();
 
-        status = this.loginController.Authentication(dbUser, username, password);
+        status = this.loginController.Authentication(dbConnection.db, username, password);
         if (status) {
-            new MainView(loginController.user);
+//            new MainView(loginController.user);
         } else
             System.out.println("Data not match in out record !!");
     }
