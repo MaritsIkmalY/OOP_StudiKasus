@@ -52,7 +52,7 @@ public class MainView implements BaseView {
                     System.out.print("Pilih ID Yang Ingin Di Edit : ");
                     pilih = input.nextInt();
                     input.nextLine();
-                    this.formEdit();
+                    this.inputData();
 
                     if (todo.edit(pilih, title, description)) {
                         System.out.println("ToDo Berhasil Di Edit!");
@@ -101,18 +101,7 @@ public class MainView implements BaseView {
 
     public void inputData() {
         System.out.println("====================");
-        System.out.println("Form Tambah ToDo List");
-        System.out.println("====================");
-        System.out.print("Judul Task : ");
-        title = input.nextLine();
-        System.out.print("Deskripsi Task : ");
-        description = input.nextLine();
-        System.out.println();
-    }
-
-    public void formEdit() {
-        System.out.println("====================");
-        System.out.println("Form Edit ToDo List");
+        System.out.println("Form ToDo List");
         System.out.println("====================");
         System.out.print("Judul Task : ");
         title = input.nextLine();
