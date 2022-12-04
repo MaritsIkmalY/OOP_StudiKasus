@@ -11,9 +11,13 @@ public class MainView implements BaseView {
     String title;
     String description;
 
-    public MainView(User user, Db db) {
-        todo = new ToDoController(db, user);
+    public MainView(Db db) {
+        todo = new ToDoController(db);
+    }
+
+    public void set(User user) {
         this.user = user;
+        todo.setOwner(user);
         menu();
     }
 

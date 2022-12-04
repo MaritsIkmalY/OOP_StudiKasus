@@ -9,8 +9,11 @@ public class ToDoController {
     public User user;
     int incrementID = 1;
 
-    public ToDoController(Db db, User user) {
+    public ToDoController(Db db) {
         this.db = db;
+    }
+
+    public void setOwner(User user) {
         this.user = user;
     }
 

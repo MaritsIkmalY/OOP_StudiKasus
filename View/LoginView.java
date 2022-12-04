@@ -8,11 +8,13 @@ public class LoginView implements BaseView {
     public DbConnection dbConnection;
     public LoginController loginController;
     public RegisterView registerView;
+    public MainView mainView;
 
     public LoginView() {
         dbConnection = new DbConnection();
         loginController = new LoginController();
         registerView = new RegisterView(dbConnection.db);
+        mainView = new MainView(dbConnection.db);
     }
 
     public void alreadyRegistered() {
@@ -58,7 +60,7 @@ public class LoginView implements BaseView {
 
         status = this.loginController.Authentication(dbConnection.db, username, password);
         if (status) {
-           new MainView(loginController.user, dbConnection.db);
+           mainView.set(loginController.user);
            loginController.user = null;
         } else
             System.out.println("Data not match in out record !!");
