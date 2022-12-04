@@ -2,6 +2,7 @@ package View;
 
 import Controller.DbConnection;
 import Controller.LoginController;
+import Controller.RegisterController;
 
 public class LoginView implements BaseView {
     public DbConnection dbConnection;

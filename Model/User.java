@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class User {
     public int id;
     public String name;

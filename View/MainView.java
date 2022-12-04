@@ -12,14 +12,13 @@ public class MainView implements BaseView {
     String description;
 
     public MainView(User user, Db db) {
-        todo = new ToDoController(db);
+        todo = new ToDoController(db, user);
         this.user = user;
         menu();
     }
 
     public void menu() {
         int pilih;
-        char jawab;
 
         do {
             System.out.println("====================");
@@ -30,6 +29,7 @@ public class MainView implements BaseView {
             System.out.println("3. Edit Todo List");
             System.out.println("4. Hapus Todo List");
             System.out.println("5. Data User");
+            System.out.println("6. Logout");
 
             System.out.print("Pilih Menu : ");
             pilih = input.nextInt();
@@ -62,7 +62,8 @@ public class MainView implements BaseView {
                     pilih = input.nextInt();
                     input.nextLine();
                     if (todo.destroy(pilih)) {
-                        System.out.print("ToDo Berhasil Dihapus !");
+                        System.out.println("ToDo Berhasil Dihapus !");
+                        todo.show(user);
                     } else {
                         System.out.println("Inputan id salah !");
                     }
@@ -70,19 +71,23 @@ public class MainView implements BaseView {
 
                 case 5 -> this.showData();
 
+                case 6 -> {
+                    this.user = null;
+                    System.out.println("Logout Berhasil");
+                }
+
                 default -> System.out.println("Invalid Input");
             }
-            System.out.print("Mau Lagi ? y / t : ");
-            jawab = input.next().charAt(0);
-        } while (jawab == 'y' || jawab == 'Y');
+
+        } while (pilih != 6);
     }
 
     public void showData() {
         System.out.println("====================");
         System.out.println("Profile User");
         System.out.println("====================");
-        System.out.println("Nama : " + user.name);
         System.out.println("Id : " + user.id);
+        System.out.println("Nama : " + user.name);
         System.out.println("Username : " + user.username);
         System.out.println("Address : " + user.address);
         System.out.println("Phone : " + user.phone);

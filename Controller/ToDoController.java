@@ -9,8 +9,9 @@ public class ToDoController {
     public Db db;
     int incrementID = 1;
 
-    public ToDoController(Db db) {
+    public ToDoController(Db db, User user) {
         this.db = db;
+        this.user = user;
     }
 
     public void show(User user) {
