@@ -2,13 +2,16 @@ package Controller;
 
 import Database.Db;
 import Model.ToDo;
+import Model.User;
 
 public class ToDoController {
     public Db db;
-    public int incrementID = 1;
+    public User user;
+    int incrementID = 1;
 
-    public ToDoController(Db db) {
+    public ToDoController(Db db, User user) {
         this.db = db;
+        this.user = user;
     }
 
     public void show() {
@@ -17,16 +20,18 @@ public class ToDoController {
         System.out.println("====================");
         System.out.println("id\tJudul\tDescription");
         for(ToDo ToDo : db.Todo) {
-            System.out.print(" " + ToDo.id + "\t");
-            System.out.print(ToDo.title + "\t");
-            System.out.print(ToDo.description);
-            System.out.println();
+            if(ToDo.owner_id == user.id) {
+                System.out.print(" " + ToDo.id + "\t");
+                System.out.print(ToDo.title + "\t");
+                System.out.print(ToDo.description);
+                System.out.println();
+            }
         }
     }
 
     public void store(String title, String description) {
         try {
-           if( db.Todo.add(new ToDo(incrementID, title, description)) ) {
+           if( db.Todo.add(new ToDo(incrementID, user.id, title, description)) ) {
                incrementID++;
                System.out.println("Todo Berhasil Ditambahkan");
            }

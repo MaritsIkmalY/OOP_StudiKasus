@@ -10,7 +10,6 @@ public class RegisterView implements BaseView {
     public RegisterView(Db db) {
         registerController = new RegisterController();
         this.db = db;
-        this.inputData();
     }
 
     public void inputData() {
