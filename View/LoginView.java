@@ -55,7 +55,7 @@ public class LoginView implements BaseView {
 
         status = this.loginController.Authentication(dbConnection.db, username, password);
         if (status) {
-//            new MainView(loginController.user);
+           new MainView(loginController.user, dbConnection.db);
         } else
             System.out.println("Data not match in out record !!");
     }

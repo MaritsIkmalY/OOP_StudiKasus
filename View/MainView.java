@@ -1,19 +1,19 @@
 package View;
 
+import Controller.DbConnection;
 import Controller.ToDoController;
 import Database.Db;
 import Model.User;
 
 public class MainView implements BaseView {
     public User user;
-    public Db db = new Db();
     public ToDoController todo;
     String title;
     String description;
 
-    public MainView() {
+    public MainView(User user, Db db) {
         todo = new ToDoController(db);
-//        this.user = user;
+        this.user = user;
         menu();
     }
 
