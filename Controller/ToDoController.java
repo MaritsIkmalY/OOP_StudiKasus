@@ -5,8 +5,8 @@ import Model.ToDo;
 import Model.User;
 
 public class ToDoController {
-    public Db db;
     public User user;
+    public Db db;
     int incrementID = 1;
 
     public ToDoController(Db db) {
@@ -17,13 +17,13 @@ public class ToDoController {
         this.user = user;
     }
 
-    public void show() {
+    public void show(User user) {
         System.out.println("====================");
         System.out.println("Show ToDo List");
         System.out.println("====================");
         System.out.println("id\tJudul\tDescription");
-        for(ToDo ToDo : db.Todo) {
-            if(ToDo.owner_id == user.id) {
+        for (ToDo ToDo : db.Todo) {
+            if (ToDo.owner == user.id) {
                 System.out.print(" " + ToDo.id + "\t");
                 System.out.print(ToDo.title + "\t");
                 System.out.print(ToDo.description);
@@ -32,20 +32,20 @@ public class ToDoController {
         }
     }
 
-    public void store(String title, String description) {
+    public void store(int owner, String title, String description) {
         try {
-           if( db.Todo.add(new ToDo(incrementID, user.id, title, description)) ) {
-               incrementID++;
-               System.out.println("Todo Berhasil Ditambahkan");
-           }
+            if (db.Todo.add(new ToDo(incrementID, owner, title, description))) {
+                incrementID++;
+                System.out.println("Todo Berhasil Ditambahkan");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public boolean edit(int id, String title, String description) {
-        for(ToDo ToDo : db.Todo) {
-            if(ToDo.id == id) {
+        for (ToDo ToDo : db.Todo) {
+            if (ToDo.id == id) {
                 ToDo.title = title;
                 ToDo.description = description;
                 return true;
@@ -55,12 +55,12 @@ public class ToDoController {
     }
 
     public boolean destroy(int id) {
-       for(ToDo ToDo : db.Todo) {
-           if(ToDo.id == id) {
-               db.Todo.remove(id-1);
-               return true;
-           }
-       }
-       return false;
+        for (ToDo ToDo : db.Todo) {
+            if (ToDo.id == id) {
+                db.Todo.remove(id - 1);
+                return true;
+            }
+        }
+        return false;
     }
 }

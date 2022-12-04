@@ -10,8 +10,6 @@ public class User {
     public String phone;
     public String address;
 
-
-
     public User(int id, String name, String username, String password, String phone, String address) {
         this.id = id;
         this.name = name;
