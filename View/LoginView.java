@@ -6,10 +6,12 @@ import Controller.LoginController;
 public class LoginView implements BaseView {
     public DbConnection dbConnection;
     public LoginController loginController;
+    public RegisterView registerView;
 
     public LoginView() {
         dbConnection = new DbConnection();
         loginController = new LoginController();
+        registerView = new RegisterView(dbConnection.db);
     }
 
     public void alreadyRegistered() {
@@ -26,7 +28,7 @@ public class LoginView implements BaseView {
             switch (jawaban) {
                 case 'y' -> this.inputData();
                 case 't' -> {
-                    new RegisterView(dbConnection.db);
+                    registerView.inputData();
                     this.inputData();
                 }
                 default -> System.out.println("Invalid Input");
@@ -55,7 +57,7 @@ public class LoginView implements BaseView {
 
         status = this.loginController.Authentication(dbConnection.db, username, password);
         if (status) {
-           new MainView(loginController.user, dbConnection.db);
+            new MainView(loginController.user, dbConnection.db);
         } else
             System.out.println("Data not match in out record !!");
     }

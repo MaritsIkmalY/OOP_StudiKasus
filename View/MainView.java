@@ -36,29 +36,28 @@ public class MainView implements BaseView {
             input.nextLine();
 
             switch (pilih) {
-                case 1 -> todo.show();
+                case 1 -> todo.show(user);
 
                 case 2 -> {
                     this.inputData();
-                    todo.store(title, description);
+                    todo.store(user.id, title, description);
                 }
 
                 case 3 -> {
-                    todo.show();
+                    todo.show(user);
                     System.out.print("Pilih ID Yang Ingin Di Edit : ");
                     pilih = input.nextInt();
                     input.nextLine();
-                    this.formEdit();
-                    if(todo.edit(pilih, title, description)) {
+                    if (todo.edit(pilih, title, description)) {
+                        this.formEdit();
                         System.out.println("ToDo Berhasil Di Edit!");
-                    }
-                    else {
-                        System.out.println("Todo Gagal Di Edit !");
+                    } else {
+                        System.out.println("Tidak ada ToDO dengan Id " + pilih);
                     }
                 }
 
                 case 4 -> {
-                    todo.show();
+                    todo.show(user);
                     System.out.print("Pilih ID Yang Ingin Di Hapus : ");
                     pilih = input.nextInt();
                     input.nextLine();
@@ -80,12 +79,13 @@ public class MainView implements BaseView {
 
     public void showData() {
         System.out.println("====================");
-        System.out.println("Data User");
+        System.out.println("Profile User");
         System.out.println("====================");
         System.out.println("Nama : " + user.name);
+        System.out.println("Id : " + user.id);
         System.out.println("Username : " + user.username);
         System.out.println("Address : " + user.address);
-        System.out.println("Address : " + user.phone);
+        System.out.println("Phone : " + user.phone);
     }
 
     public void inputData() {
