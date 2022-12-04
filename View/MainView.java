@@ -43,11 +43,23 @@ public class MainView implements BaseView {
                     todo.store(title, description);
                 }
 
-                case 3 -> todo.edit();
+                case 3 -> {
+                    todo.show();
+                    System.out.print("Pilih ID Yang Ingin Di Edit : ");
+                    pilih = input.nextInt();
+                    input.nextLine();
+                    this.formEdit();
+                    if(todo.edit(pilih, title, description)) {
+                        System.out.println("ToDo Berhasil Di Edit!");
+                    }
+                    else {
+                        System.out.println("Todo Gagal Di Edit !");
+                    }
+                }
 
                 case 4 -> {
                     todo.show();
-                    System.out.print("Pilih id Yang Ingin Di Hapus : ");
+                    System.out.print("Pilih ID Yang Ingin Di Hapus : ");
                     pilih = input.nextInt();
                     input.nextLine();
                     if (todo.destroy(pilih)) {
@@ -79,6 +91,17 @@ public class MainView implements BaseView {
     public void inputData() {
         System.out.println("====================");
         System.out.println("Form Tambah ToDo List");
+        System.out.println("====================");
+        System.out.print("Judul Task : ");
+        title = input.nextLine();
+        System.out.print("Deskripsi Task : ");
+        description = input.nextLine();
+        System.out.println();
+    }
+
+    public void formEdit() {
+        System.out.println("====================");
+        System.out.println("Form Edit ToDo List");
         System.out.println("====================");
         System.out.print("Judul Task : ");
         title = input.nextLine();

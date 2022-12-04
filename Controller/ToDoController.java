@@ -35,8 +35,15 @@ public class ToDoController {
         }
     }
 
-    public void edit() {
-
+    public boolean edit(int id, String title, String description) {
+        for(ToDo ToDo : db.Todo) {
+            if(ToDo.id == id) {
+                ToDo.title = title;
+                ToDo.description = description;
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean destroy(int id) {
