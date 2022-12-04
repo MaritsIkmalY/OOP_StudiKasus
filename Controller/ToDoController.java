@@ -22,6 +22,9 @@ public class ToDoController {
         System.out.println("Show ToDo List");
         System.out.println("====================");
         System.out.println("id\tJudul\tDescription");
+        if (db.Todo.size() < 1) {
+            System.out.println("<<Belum Ada Todo List...>>");
+        }
         for (ToDo ToDo : db.Todo) {
             if (ToDo.owner == user.id) {
                 System.out.print(" " + ToDo.id + "\t");
@@ -30,6 +33,7 @@ public class ToDoController {
                 System.out.println();
             }
         }
+        System.out.println();
     }
 
     public void store(int owner, String title, String description) {

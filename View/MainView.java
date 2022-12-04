@@ -50,7 +50,11 @@ public class MainView implements BaseView {
                 case 3 -> {
                     todo.show(user);
                     System.out.print("Pilih ID Yang Ingin Di Edit : ");
-                    pilih = input.nextInt();
+                    try {
+                        pilih = input.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Error input!!");
+                    }
                     input.nextLine();
                     this.inputData();
 
@@ -64,8 +68,13 @@ public class MainView implements BaseView {
 
                 case 4 -> {
                     todo.show(user);
-                    System.out.print("Pilih ID Yang Ingin Di Hapus : ");
-                    pilih = input.nextInt();
+                    System.out.print("Pilih Id Yang Ingin Di Hapus : ");
+                    try {
+                        pilih = input.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("Error input!!");
+                    }
+
                     input.nextLine();
                     if (todo.destroy(pilih)) {
                         System.out.println("ToDo Berhasil Dihapus !");
