@@ -36,7 +36,7 @@ public class ToDoController {
         try {
             if (db.Todo.add(new ToDo(incrementID, owner, title, description))) {
                 incrementID++;
-                System.out.println("Todo Berhasil Ditambahkan");
+                System.out.println("Todo Berhasil Ditambahkan !");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -45,8 +45,9 @@ public class ToDoController {
 
     public boolean edit(int id, String title, String description) {
         for (ToDo ToDo : db.Todo) {
-            if (ToDo.id == id) {
+            if (ToDo.id == id && ToDo.owner == user.id) {
                 ToDo.title = title;
+                System.out.println(ToDo.title);
                 ToDo.description = description;
                 return true;
             }
@@ -56,7 +57,7 @@ public class ToDoController {
 
     public boolean destroy(int id) {
         for (ToDo ToDo : db.Todo) {
-            if (ToDo.id == id) {
+            if (ToDo.id == id && ToDo.owner == user.id) {
                 db.Todo.remove(id - 1);
                 return true;
             }

@@ -1,6 +1,5 @@
 package View;
 
-import Controller.DbConnection;
 import Controller.ToDoController;
 import Database.Db;
 import Model.User;
@@ -45,6 +44,7 @@ public class MainView implements BaseView {
                 case 2 -> {
                     this.inputData();
                     todo.store(user.id, title, description);
+                    todo.show(user);
                 }
 
                 case 3 -> {
@@ -52,9 +52,11 @@ public class MainView implements BaseView {
                     System.out.print("Pilih ID Yang Ingin Di Edit : ");
                     pilih = input.nextInt();
                     input.nextLine();
+                    this.formEdit();
+
                     if (todo.edit(pilih, title, description)) {
-                        this.formEdit();
                         System.out.println("ToDo Berhasil Di Edit!");
+                        todo.show(user);
                     } else {
                         System.out.println("Tidak ada ToDO dengan Id " + pilih);
                     }
