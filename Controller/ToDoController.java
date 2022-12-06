@@ -64,11 +64,13 @@ public class ToDoController {
     }
 
     public boolean destroy(int id) {
+        int index = 0;
         for (ToDo ToDo : db.Todo) {
             if (ToDo.getId() == id && ToDo.getUser_id() == user.id()) {
-                db.Todo.remove(id - 1);
+                db.Todo.remove(index);
                 return true;
             }
+            index++;
         }
         return false;
     }
