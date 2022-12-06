@@ -20,6 +20,7 @@ public class MainView implements BaseView {
         menu();
     }
 
+
     public void menu() {
         int pilih;
 
@@ -43,7 +44,7 @@ public class MainView implements BaseView {
 
                 case 2 -> {
                     this.inputData();
-                    todo.store(user.id, title, description);
+                    todo.store(user.id(), title, description);
                     todo.show(user);
                 }
 
@@ -55,6 +56,7 @@ public class MainView implements BaseView {
                     } catch (Exception e) {
                         System.out.println("Error input!!");
                     }
+
                     input.nextLine();
                     this.inputData();
 
@@ -62,7 +64,7 @@ public class MainView implements BaseView {
                         System.out.println("ToDo Berhasil Di Edit!");
                         todo.show(user);
                     } else {
-                        System.out.println("Tidak ada ToDO dengan Id " + pilih);
+                        System.out.println("Tidak ada ToDo dengan Id " + pilih);
                     }
                 }
 
@@ -76,11 +78,12 @@ public class MainView implements BaseView {
                     }
 
                     input.nextLine();
+
                     if (todo.destroy(pilih)) {
                         System.out.println("ToDo Berhasil Dihapus !");
                         todo.show(user);
                     } else {
-                        System.out.println("Inputan id salah !");
+                        System.out.println("Tidak ada ToDo dengan Id " + pilih);
                     }
                 }
 
@@ -101,11 +104,7 @@ public class MainView implements BaseView {
         System.out.println("====================");
         System.out.println("Profile User");
         System.out.println("====================");
-        System.out.println("Id : " + user.id);
-        System.out.println("Nama : " + user.name);
-        System.out.println("Username : " + user.username);
-        System.out.println("Address : " + user.address);
-        System.out.println("Phone : " + user.phone);
+        System.out.println(user.toString());
     }
 
     public void inputData() {

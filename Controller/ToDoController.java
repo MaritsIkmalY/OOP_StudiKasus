@@ -22,14 +22,15 @@ public class ToDoController {
         System.out.println("Show ToDo List");
         System.out.println("====================");
         System.out.println("id\tJudul\tDescription");
+        System.out.println("====================");
         if (db.Todo.size() < 1) {
             System.out.println("<<Belum Ada Todo List...>>");
         }
         for (ToDo ToDo : db.Todo) {
-            if (ToDo.owner == user.id) {
-                System.out.print(" " + ToDo.id + "\t");
-                System.out.print(ToDo.title + "\t");
-                System.out.print(ToDo.description);
+            if (ToDo.getUser_id() == user.id()) {
+                System.out.print(" " + ToDo.getId() + "\t");
+                System.out.print(ToDo.getTitle() + "\t");
+                System.out.print(ToDo.getDescription());
                 System.out.println();
             }
         }
@@ -43,16 +44,21 @@ public class ToDoController {
                 System.out.println("Todo Berhasil Ditambahkan !");
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Something Error !!");
         }
     }
 
     public boolean edit(int id, String title, String description) {
         for (ToDo ToDo : db.Todo) {
-            if (ToDo.id == id && ToDo.owner == user.id) {
-                ToDo.title = title;
-                System.out.println(ToDo.title);
-                ToDo.description = description;
+            if (ToDo.getId() == id && ToDo.getUser_id() == user.id()) {
+                if (title != null && !title.trim().isEmpty()) {
+                    ToDo.setTitle(title);
+                }
+
+                if (description != null && !description.trim().isEmpty()) {
+                    ToDo.setDescription(description);
+                }
+
                 return true;
             }
         }
@@ -61,7 +67,7 @@ public class ToDoController {
 
     public boolean destroy(int id) {
         for (ToDo ToDo : db.Todo) {
-            if (ToDo.id == id && ToDo.owner == user.id) {
+            if (ToDo.getId() == id && ToDo.getUser_id() == user.id()) {
                 db.Todo.remove(id - 1);
                 return true;
             }

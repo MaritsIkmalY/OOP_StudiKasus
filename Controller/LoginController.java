@@ -11,7 +11,7 @@ public class LoginController {
     public boolean Authentication(Db db, String username, String password) {
         for (User user : db.User) {
 
-            if (Objects.equals(user.username, username) && Objects.equals(user.password, password)) {
+            if (Objects.equals(user.username(), username) && Objects.equals(user.password(), password)) {
                 setAuthUser(user);
                 return true;
             }

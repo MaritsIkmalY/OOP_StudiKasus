@@ -2,7 +2,6 @@ package View;
 
 import Controller.DbConnection;
 import Controller.LoginController;
-import Controller.RegisterController;
 
 public class LoginView implements BaseView {
     public DbConnection dbConnection;
@@ -17,14 +16,14 @@ public class LoginView implements BaseView {
         mainView = new MainView(dbConnection.db);
     }
 
-    public void alreadyRegistered() {
+    public void start() {
         char jawaban;
 
         do {
             System.out.println("====================");
-            System.out.println("Todo List App");
+            System.out.println("Welcome to Todo List App");
             System.out.println("====================");
-            System.out.print("Apakah Kamu Sudah Memiliki Akun ? (y/t) :");
+            System.out.print("Apakah Kamu Sudah Memiliki Akun ? (y/t) : ");
             jawaban = input.next().charAt(0);
             input.nextLine();
 
