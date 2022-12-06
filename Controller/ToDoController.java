@@ -17,11 +17,11 @@ public class ToDoController {
         this.user = user;
     }
 
-    public void show(User user) {
+    public void show() {
         System.out.println("====================");
         System.out.println("Show ToDo List");
         System.out.println("====================");
-        System.out.println("id\tJudul\tDescription\n");
+        System.out.println("id\tJudul\tDescription");
         System.out.println("====================");
 
         for (ToDo ToDo : db.Todo) {
@@ -36,14 +36,14 @@ public class ToDoController {
         System.out.println();
     }
 
-    public void store(int owner, String title, String description) {
+    public void store(String title, String description) {
         try {
-            if (db.Todo.add(new ToDo(incrementID, owner, title, description))) {
+            if (db.Todo.add(new ToDo(incrementID, user.id(), title, description))) {
                 incrementID++;
                 System.out.println("Todo Berhasil Ditambahkan !");
             }
         } catch (Exception e) {
-            System.out.println("Something Error !!");
+            System.out.println("Something Error !!" + e);
         }
     }
 
@@ -57,7 +57,6 @@ public class ToDoController {
                 if (description != null && !description.trim().isEmpty()) {
                     ToDo.setDescription(description);
                 }
-
                 return true;
             }
         }

@@ -17,9 +17,9 @@ public class LoginController {
             }
         }
         return false;
-    }
+    }//pengecekan
 
     public void setAuthUser(User user) {
         this.user = user;
-    }
+    } // set auth user
 }

@@ -1,8 +1,8 @@
 package Model;
 
 public class ToDo {
-    private final int id;
-    private final int user_id;
+    private final int id; //unique
+    private final int user_id; //
     private String title;
     private String description;
 
@@ -36,30 +36,5 @@ public class ToDo {
     public void setDescription(String description) {
         this.description = description;
     }
-//    public static class ToDoBuilder {
-//        private final int id;
-//        private final int owner;
-//        private String title;
-//        private String description;
-//
-//        public ToDoBuilder(int id, int owner) {
-//            this.id = id;
-//            this.owner = owner;
-//        }
-//
-//        public ToDoBuilder title(String title) {
-//            this.title = title;
-//            return this;
-//        }
-//
-//        public ToDoBuilder description(String description) {
-//            this.description = description;
-//            return this;
-//        }
-//
-//        public ToDo build() {
-//            return new ToDo(this);
-//        }
-//    }
 }
 

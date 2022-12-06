@@ -39,17 +39,17 @@ public class MainView implements BaseView {
             input.nextLine();
 
             switch (pilih) {
-                case 1 -> todo.show(user);
+                case 1 -> todo.show();
 
                 case 2 -> {
                     this.inputData();
-                    todo.store(user.id(), title, description);
-                    todo.show(user);
+                    todo.store(title, description);
+                    todo.show();
                 }
 
                 case 3 -> {
-                    todo.show(user);
-                    System.out.print("Pilih ID Yang Ingin Di Edit : ");
+                    todo.show();
+                    System.out.print("Pilih Id Yang Ingin Di Edit : ");
                     try {
                         pilih = input.nextInt();
                         input.nextLine();
@@ -61,14 +61,14 @@ public class MainView implements BaseView {
 
                     if (todo.edit(pilih, title, description)) {
                         System.out.println("ToDo Berhasil Di Edit!");
-                        todo.show(user);
+                        todo.show();
                     } else {
                         System.out.println("Tidak ada ToDo dengan Id " + pilih + "!\n");
                     }
                 }
 
                 case 4 -> {
-                    todo.show(user);
+                    todo.show();
                     System.out.print("Pilih Id Yang Ingin Di Hapus : ");
                     try {
                         pilih = input.nextInt();
@@ -79,7 +79,7 @@ public class MainView implements BaseView {
 
                     if (todo.destroy(pilih)) {
                         System.out.println("ToDo Berhasil Dihapus !");
-                        todo.show(user);
+                        todo.show();
                     } else {
                         System.out.println("Tidak ada ToDo dengan Id " + pilih);
                     }
