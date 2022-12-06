@@ -60,9 +60,10 @@ public class LoginView implements BaseView {
 
         status = this.loginController.Authentication(dbConnection.db, username, password);
         if (status) {
+           System.out.println("Berhasil login !");
            mainView.set(loginController.user);
            loginController.user = null;
         } else
-            System.out.println("Data not match in out record !!");
+            System.out.println("Data not match in our record !!");
     }
 }

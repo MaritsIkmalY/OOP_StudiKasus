@@ -26,7 +26,7 @@ public class MainView implements BaseView {
 
         do {
             System.out.println("====================");
-            System.out.println("Aplikasi ToDo List");
+            System.out.println("Hai " + user.name() + ",\nMenu Aplikasi ToDo List");
             System.out.println("====================");
             System.out.println("1. Tampilkan Todo List");
             System.out.println("2. Tambah Todo List");
@@ -64,7 +64,7 @@ public class MainView implements BaseView {
                         System.out.println("ToDo Berhasil Di Edit!");
                         todo.show(user);
                     } else {
-                        System.out.println("Tidak ada ToDo dengan Id " + pilih);
+                        System.out.println("Tidak ada ToDo dengan Id " + pilih + "!\n");
                     }
                 }
 
@@ -91,7 +91,7 @@ public class MainView implements BaseView {
 
                 case 6 -> {
                     this.user = null;
-                    System.out.println("Logout Berhasil");
+                    System.out.println("Logout Berhasil!");
                 }
 
                 default -> System.out.println("Invalid Input");
