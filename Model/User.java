@@ -29,6 +29,10 @@ public class User {
         return id;
     }
 
+    public String password() {
+        return password;
+    }
+
     @Override
     public String toString() {
         return  "Id : " + id + '\n' +

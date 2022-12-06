@@ -20,7 +20,6 @@ public class MainView implements BaseView {
         menu();
     }
 
-
     public void menu() {
         int pilih;
 
@@ -53,11 +52,11 @@ public class MainView implements BaseView {
                     System.out.print("Pilih ID Yang Ingin Di Edit : ");
                     try {
                         pilih = input.nextInt();
+                        input.nextLine();
                     } catch (Exception e) {
                         System.out.println("Error input!!");
                     }
 
-                    input.nextLine();
                     this.inputData();
 
                     if (todo.edit(pilih, title, description)) {
@@ -73,11 +72,10 @@ public class MainView implements BaseView {
                     System.out.print("Pilih Id Yang Ingin Di Hapus : ");
                     try {
                         pilih = input.nextInt();
+                        input.nextLine();
                     } catch (Exception e) {
                         System.out.println("Error input!!");
                     }
-
-                    input.nextLine();
 
                     if (todo.destroy(pilih)) {
                         System.out.println("ToDo Berhasil Dihapus !");

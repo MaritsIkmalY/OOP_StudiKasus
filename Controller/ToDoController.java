@@ -21,11 +21,9 @@ public class ToDoController {
         System.out.println("====================");
         System.out.println("Show ToDo List");
         System.out.println("====================");
-        System.out.println("id\tJudul\tDescription");
+        System.out.println("id\tJudul\tDescription\n");
         System.out.println("====================");
-        if (db.Todo.size() < 1) {
-            System.out.println("<<Belum Ada Todo List...>>");
-        }
+
         for (ToDo ToDo : db.Todo) {
             if (ToDo.getUser_id() == user.id()) {
                 System.out.print(" " + ToDo.getId() + "\t");
@@ -34,6 +32,7 @@ public class ToDoController {
                 System.out.println();
             }
         }
+
         System.out.println();
     }
 
