@@ -1,16 +1,15 @@
 package Controller;
 
-import Database.Db;
 import Model.User;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class LoginController {
-    public User user;
+    private User authUser;
 
-    public boolean Authentication(Db db, String username, String password) {
-        for (User user : db.User) {
-
+    public boolean Authentication(ArrayList<User> users, String username, String password) {
+        for (User user : users) {
             if (Objects.equals(user.username(), username) && Objects.equals(user.password(), password)) {
                 setAuthUser(user);
                 return true;
@@ -20,6 +19,10 @@ public class LoginController {
     }//pengecekan
 
     public void setAuthUser(User user) {
-        this.user = user;
+        this.authUser = user;
     } // set auth user
+
+    public User getAuthUser() {
+        return authUser;
+    }
 }

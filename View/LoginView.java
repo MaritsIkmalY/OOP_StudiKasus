@@ -7,41 +7,44 @@ public class LoginView implements BaseView {
     public DbConnection dbConnection;
     public LoginController loginController;
     public RegisterView registerView;
-    public MainView mainView;
+    public TodoView todOView;
 
     public LoginView() {
         dbConnection = new DbConnection();
         loginController = new LoginController();
-        registerView = new RegisterView(dbConnection.db);
-        mainView = new MainView(dbConnection.db);
+        registerView = new RegisterView(dbConnection.db.User);
+        todOView = new TodoView(dbConnection.db.Todo);
     }
 
     public void start() {
-        char jawaban;
+        int pilih = 0;
 
         do {
             System.out.println("====================");
             System.out.println("Welcome to Todo List App");
             System.out.println("====================");
-            System.out.print("Apakah Kamu Sudah Memiliki Akun ? (y/t) : ");
-            jawaban = input.next().charAt(0);
-            input.nextLine();
-
-            switch (jawaban) {
-                case 'y' -> this.inputData();
-                case 't' -> {
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Quit");
+            System.out.print("Pilih Menu : ");
+            try {
+                pilih = input.nextInt();
+                input.nextLine();
+            } catch (Exception e) {
+                System.out.println("input only for number");
+                input.nextLine();
+            }
+            switch (pilih) {
+                case 1 -> this.inputData();
+                case 2 -> {
                     registerView.inputData();
                     this.inputData();
                 }
-                default -> System.out.println("Invalid Input");
+                case 3 -> System.out.print("Program end...");
+                default -> System.out.println("Invalid Input select beetwen 1 - 3");
             }
-
-            System.out.print("\nIngin login kembali ? (y / t) : ");
-            jawaban = input.next().charAt(0);
-            input.nextLine();
             System.out.println();
-        } while (jawaban == 'y');
-
+        } while (pilih != 3);
     }
 
     public void inputData() {
@@ -58,11 +61,11 @@ public class LoginView implements BaseView {
         System.out.print("Masukkan Password : ");
         password = input.nextLine();
 
-        status = this.loginController.Authentication(dbConnection.db, username, password);
+        status = this.loginController.Authentication(dbConnection.db.User, username, password);
         if (status) {
-           System.out.println("Berhasil login !");
-           mainView.set(loginController.user);
-           loginController.user = null;
+            System.out.println("Berhasil login !");
+            todOView.set(loginController.getAuthUser());
+            loginController.setAuthUser(null);
         } else
             System.out.println("Data not match in our record !!");
     }

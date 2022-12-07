@@ -1,45 +1,25 @@
 package Controller;
 
-import Database.Db;
 import Model.ToDo;
-import Model.User;
+
+import java.util.ArrayList;
 
 public class ToDoController {
-    public User user;
-    public Db db;
-    int incrementID = 1;
+    public ArrayList<ToDo> todos;
+    public int incrementId = 1;
 
-    public ToDoController(Db db) {
-        this.db = db;
+    public ToDoController(ArrayList<ToDo> todos) {
+        this.todos = todos;
     }
 
-    public void setOwner(User user) {
-        this.user = user;
+    public ArrayList<ToDo> getAllTodos() {
+        return todos;
     }
 
-    public void show() {
-        System.out.println("====================");
-        System.out.println("Show ToDo List");
-        System.out.println("====================");
-        System.out.println("id\tJudul\tDescription");
-        System.out.println("====================");
-
-        for (ToDo ToDo : db.Todo) {
-            if (ToDo.getUser_id() == user.id()) {
-                System.out.print(" " + ToDo.getId() + "\t");
-                System.out.print(ToDo.getTitle() + "\t");
-                System.out.print(ToDo.getDescription());
-                System.out.println();
-            }
-        }
-
-        System.out.println();
-    }
-
-    public void store(String title, String description) {
+    public void store(int user_id, String owner, String title, String description) {
         try {
-            if (db.Todo.add(new ToDo(incrementID, user.id(), title, description))) {
-                incrementID++;
+            if (todos.add(new ToDo(incrementId, user_id, owner, title, description))) {
+                incrementId++;
                 System.out.println("Todo Berhasil Ditambahkan !");
             }
         } catch (Exception e) {
@@ -47,31 +27,42 @@ public class ToDoController {
         }
     }
 
-    public boolean edit(int id, String title, String description) {
-        for (ToDo ToDo : db.Todo) {
-            if (ToDo.getId() == id && ToDo.getUser_id() == user.id()) {
-                if (title != null && !title.trim().isEmpty()) {
-                    ToDo.setTitle(title);
-                }
-
-                if (description != null && !description.trim().isEmpty()) {
-                    ToDo.setDescription(description);
-                }
-                return true;
+    public void edit(int id, int user_id, String title, String description) {
+        ToDo todo = validate(id, user_id);
+        if (todo != null) {
+            if (title != null && !title.trim().isEmpty()) {
+                todo.setTitle(title);
             }
+
+            if (description != null && !description.trim().isEmpty()) {
+                todo.setDescription(description);
+            }
+            todo.setLast_updated();
+            System.out.println("Todo List berhasil di edit!");
+        } else {
+            System.out.println("Todo List gagal di edit!");
         }
-        return false;
+
     }
 
-    public boolean destroy(int id) {
-        int index = 0;
-        for (ToDo ToDo : db.Todo) {
-            if (ToDo.getId() == id && ToDo.getUser_id() == user.id()) {
-                db.Todo.remove(index);
-                return true;
-            }
-            index++;
+    public void destroy(int id, int user_id) {
+        ToDo todo = validate(id, user_id);
+
+        if (todo != null) {
+            todos.remove(todo);
+            System.out.println("Todo List berhasil dihapus!");
+        } else {
+            System.out.println("Todo List gagal dihapus!");
         }
-        return false;
     }
+
+    public ToDo validate(int id, int user_id) {
+        for (ToDo todo : todos) {
+            if (todo.getId() == id && todo.getUser_id() == user_id) {
+                return todo;
+            }
+        }
+        return null;
+    }
+
 }

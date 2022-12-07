@@ -33,7 +33,6 @@ public class User {
         return password;
     }
 
-    @Override
     public String toString() {
         return  "Id : " + id + '\n' +
                 "Name : " + name + '\n' +

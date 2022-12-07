@@ -1,16 +1,16 @@
 package View;
 
 import Controller.RegisterController;
-import Database.Db;
 import Model.User;
+import java.util.ArrayList;
 
 public class RegisterView implements BaseView {
     public RegisterController registerController;
-    public Db db;
+    public ArrayList<User> users;
 
-    public RegisterView(Db db) {
+    public RegisterView(ArrayList<User> users) {
         registerController = new RegisterController();
-        this.db = db;
+        this.users = users;
     }
 
     public void inputData() {
@@ -33,7 +33,7 @@ public class RegisterView implements BaseView {
         address = input.nextLine();
 
         user = registerController.generateUser(name, username, password, phone, address);
-        if (registerController.storeUser(db, user)) {
+        if (registerController.storeUser(users, user)) {
             System.out.println("Registrasi berhasil !");
         } else {
             System.out.println("Registrasi Gagal, ada data yang kembar");

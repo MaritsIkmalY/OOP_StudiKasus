@@ -1,8 +1,8 @@
 package Controller;
 
-import Database.Db;
 import Model.User;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class RegisterController {
@@ -13,14 +13,14 @@ public class RegisterController {
         return new User(incrementId, name, username, password, phone, address);
     }//user baru
 
-    public boolean storeUser(Db db, User user) {
+    public boolean storeUser(ArrayList<User> users, User user) {
         //ngecek usernmae sudah ada /blm di array list?
-        for(User userdb : db.User) {
+        for(User userdb : users) {
             if(Objects.equals(userdb.username(),user.username())) {
                 return false;
             }
         }
-        db.User.add(user);
+        users.add(user);
         return true;
     }
 
